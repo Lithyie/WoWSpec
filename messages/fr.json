@@ -1,0 +1,51 @@
+{
+  "nav": {
+    "home": "Accueil",
+    "guides": "Guides",
+    "search_placeholder": "Rechercher une classe ou spé..."
+  },
+  "home": {
+    "title": "Guides de Spé WoW",
+    "subtitle": "Des guides clairs et visuels pour chaque spécialisation de World of Warcraft.",
+    "all_roles": "Tous les rôles",
+    "filter_tanks": "Tanks",
+    "filter_healers": "Soigneurs",
+    "filter_dps": "DPS"
+  },
+  "roles": {
+    "tank": "Tank",
+    "healer": "Soigneur",
+    "melee_dps": "DPS Mêlée",
+    "ranged_dps": "DPS Distance"
+  },
+  "guide": {
+    "overview": "Présentation",
+    "stat_priority": "Priorité des Stats",
+    "talents": "Talents",
+    "rotation": "Rotation",
+    "gear": "Équipement & BIS",
+    "tips": "Conseils & Astuces",
+    "strengths": "Points Forts",
+    "weaknesses": "Points Faibles",
+    "opener": "Ouverture",
+    "priority_list": "Liste de Priorités",
+    "cooldowns": "Cooldowns",
+    "source": "Voir sur Wowhead",
+    "updated": "Mis à jour",
+    "patch": "Patch",
+    "copy_talents": "Copier le code talents",
+    "copied": "Copié !",
+    "best_in_slot": "Meilleur équipement",
+    "slot": "Emplacement",
+    "item": "Objet",
+    "source_location": "Source",
+    "tier_set": "Bonus de Tier Set",
+    "guide_unavailable": "Guide non disponible",
+    "guide_unavailable_desc": "Ce guide n'a pas encore été récupéré. Vous pouvez le consulter directement sur Wowhead.",
+    "view_on_wowhead": "Voir le guide sur Wowhead"
+  },
+  "language": {
+    "en": "English",
+    "fr": "Français"
+  }
+}

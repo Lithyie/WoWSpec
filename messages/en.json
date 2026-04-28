@@ -1,0 +1,51 @@
+{
+  "nav": {
+    "home": "Home",
+    "guides": "Guides",
+    "search_placeholder": "Search class or spec..."
+  },
+  "home": {
+    "title": "WoW Spec Guides",
+    "subtitle": "Clear, visual guides for every World of Warcraft specialization.",
+    "all_roles": "All roles",
+    "filter_tanks": "Tanks",
+    "filter_healers": "Healers",
+    "filter_dps": "DPS"
+  },
+  "roles": {
+    "tank": "Tank",
+    "healer": "Healer",
+    "melee_dps": "Melee DPS",
+    "ranged_dps": "Ranged DPS"
+  },
+  "guide": {
+    "overview": "Overview",
+    "stat_priority": "Stat Priority",
+    "talents": "Talents",
+    "rotation": "Rotation",
+    "gear": "Gear & BIS",
+    "tips": "Tips & Tricks",
+    "strengths": "Strengths",
+    "weaknesses": "Weaknesses",
+    "opener": "Opener",
+    "priority_list": "Priority List",
+    "cooldowns": "Cooldowns",
+    "source": "View on Wowhead",
+    "updated": "Updated",
+    "patch": "Patch",
+    "copy_talents": "Copy talent string",
+    "copied": "Copied!",
+    "best_in_slot": "Best in Slot",
+    "slot": "Slot",
+    "item": "Item",
+    "source_location": "Source",
+    "tier_set": "Tier Set Bonus",
+    "guide_unavailable": "Guide not yet available",
+    "guide_unavailable_desc": "We haven't fetched this guide yet. You can view it directly on Wowhead.",
+    "view_on_wowhead": "View guide on Wowhead"
+  },
+  "language": {
+    "en": "English",
+    "fr": "Français"
+  }
+}

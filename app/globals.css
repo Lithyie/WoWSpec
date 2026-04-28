@@ -1,0 +1,73 @@
+@import "tailwindcss";
+
+@theme {
+  /* Backgrounds */
+  --color-base: #0D0E12;
+  --color-surface: #13151C;
+  --color-elevated: #1C1F2A;
+  --color-border: #2A2D3A;
+
+  /* Foreground / Text */
+  --color-fg: #E8E9EF;
+  --color-fg-muted: #8B8FA8;
+  --color-fg-subtle: #555869;
+
+  /* Accents */
+  --color-gold: #C89B3C;
+  --color-gold-light: #E8BE6C;
+  --color-blue: #2A6FDB;
+  --color-blue-light: #4A8FFF;
+
+  /* Role colors */
+  --color-tank: #4A90D9;
+  --color-healer: #5BA85A;
+  --color-melee: #D94A4A;
+  --color-ranged: #C89B3C;
+
+  /* Feedback */
+  --color-success: #3D8B3D;
+  --color-error: #8B3D3D;
+
+  /* Radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+
+  /* Font fallbacks — overridden at runtime by next/font CSS variables on <body> */
+  --font-sans: ui-sans-serif, system-ui, sans-serif;
+  --font-display: ui-serif, serif;
+  --font-mono: ui-monospace, monospace;
+}
+
+@layer base {
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    background-color: var(--color-base);
+    color: var(--color-fg);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background-color: var(--color-base);
+    min-height: 100vh;
+  }
+
+  ::selection {
+    background-color: color-mix(in srgb, var(--color-gold) 30%, transparent);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-blue);
+    outline-offset: 2px;
+    border-radius: var(--radius-sm);
+  }
+
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-border) transparent;
+  }
+}

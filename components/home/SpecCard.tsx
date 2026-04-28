@@ -68,6 +68,9 @@ export function SpecCard({ spec, cls, locale, index }: SpecCardProps) {
               width={54}
               height={54}
               className="rounded-lg relative z-10"
+              style={{
+                boxShadow: '0 0 0 1px rgba(0,0,0,0.9), 0 4px 20px rgba(0,0,0,0.85)',
+              }}
               unoptimized
             />
           </motion.div>

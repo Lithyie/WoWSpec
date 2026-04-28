@@ -94,7 +94,7 @@ export function ClassBrowser({ classes, locale }: ClassBrowserProps) {
       </div>
 
       {/* Icon grid — groups by class, all centered */}
-      <div className="flex flex-col items-center gap-4 w-full max-w-2xl">
+      <div className="flex flex-col items-center gap-4 w-full max-w-4xl">
         <AnimatePresence mode="popLayout">
           {filtered.map((cls, i) => (
             <ClassRow key={cls.id} cls={cls} locale={locale} rowIndex={i} />

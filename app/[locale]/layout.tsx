@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { hasLocale, NextIntlClientProvider } from 'next-intl'
 import { getMessages, getTranslations } from 'next-intl/server'
-import { Cinzel, Inter, JetBrains_Mono } from 'next/font/google'
+import { Cinzel_Decorative, Inter, JetBrains_Mono } from 'next/font/google'
 import { routing } from '@/i18n/routing'
 import { Header } from '@/components/layout/Header'
 import '@/app/globals.css'
@@ -13,9 +13,10 @@ const inter = Inter({
   display: 'swap',
 })
 
-const cinzel = Cinzel({
+// Cinzel Decorative only for the big hero title
+const cinzelDecorative = Cinzel_Decorative({
   subsets: ['latin'],
-  weight: ['400', '600', '700'],
+  weight: ['400', '700'],
   variable: '--font-display',
   display: 'swap',
 })
@@ -58,12 +59,12 @@ export default async function LocaleLayout({
   return (
     <html lang={locale}>
       <body
-        className={`${inter.variable} ${cinzel.variable} ${jetbrains.variable} bg-base min-h-screen flex flex-col`}
+        className={`${inter.variable} ${cinzelDecorative.variable} ${jetbrains.variable} min-h-screen flex flex-col`}
         style={{ fontFamily: 'var(--font-sans)' }}
       >
         <NextIntlClientProvider messages={messages}>
           <Header />
-          <main className="flex-1">{children}</main>
+          <main className="flex-1 relative">{children}</main>
         </NextIntlClientProvider>
       </body>
     </html>

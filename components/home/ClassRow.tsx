@@ -15,37 +15,37 @@ interface ClassRowProps {
 export function ClassRow({ cls, locale, rowIndex }: ClassRowProps) {
   return (
     <motion.div
-      initial={{ opacity: 0, x: -16 }}
-      animate={{ opacity: 1, x: 0 }}
-      transition={{ duration: 0.35, delay: rowIndex * 0.05, ease: [0.25, 0.1, 0.25, 1] }}
+      initial={{ opacity: 0, y: 18 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.4, delay: rowIndex * 0.045, ease: [0.22, 1, 0.36, 1] }}
     >
-      {/* Class header */}
-      <div className="flex items-center gap-3 mb-3">
+      {/* Class label — minimal */}
+      <div className="flex items-center gap-2.5 mb-3">
         <Image
           src={`${WOWHEAD_ICON_CDN}/${cls.icon}.jpg`}
           alt={cls.name}
-          width={28}
-          height={28}
-          className="rounded-md opacity-90"
+          width={20}
+          height={20}
+          className="rounded opacity-80"
           unoptimized
         />
         <span
-          className="text-sm font-semibold tracking-widest uppercase"
-          style={{ color: cls.color, fontFamily: 'var(--font-display)' }}
+          className="text-[11px] font-bold tracking-[0.18em] uppercase"
+          style={{ color: cls.color, opacity: 0.8 }}
         >
           {cls.name}
         </span>
-        {/* Gradient rule */}
+        {/* Color-tinted rule */}
         <div
           className="flex-1 h-px"
           style={{
-            background: `linear-gradient(to right, color-mix(in srgb, ${cls.color} 30%, transparent), transparent)`,
+            background: `linear-gradient(to right, color-mix(in srgb, ${cls.color} 20%, transparent), transparent)`,
           }}
         />
       </div>
 
-      {/* Spec grid */}
-      <div className="flex flex-wrap gap-2.5 pl-1">
+      {/* Spec icons */}
+      <div className="flex flex-wrap gap-2">
         {cls.specs.map((spec, i) => (
           <SpecCard
             key={spec.id}

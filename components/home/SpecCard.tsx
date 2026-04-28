@@ -6,13 +6,6 @@ import { motion } from 'framer-motion'
 import type { WowSpec, WowClass } from '@/types'
 import { WOWHEAD_ICON_CDN } from '@/lib/data/classes'
 
-const ROLE_COLORS: Record<string, string> = {
-  tank: 'var(--color-tank)',
-  healer: 'var(--color-healer)',
-  melee_dps: 'var(--color-melee)',
-  ranged_dps: 'var(--color-ranged)',
-}
-
 interface SpecCardProps {
   spec: WowSpec
   cls: WowClass
@@ -21,65 +14,91 @@ interface SpecCardProps {
 }
 
 export function SpecCard({ spec, cls, locale, index }: SpecCardProps) {
-  const roleColor = ROLE_COLORS[spec.role]
-
   return (
     <motion.div
-      initial={{ opacity: 0, y: 12 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.3, delay: index * 0.04, ease: [0.25, 0.1, 0.25, 1] }}
+      initial={{ opacity: 0, scale: 0.88 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.28, delay: index * 0.035, ease: [0.22, 1, 0.36, 1] }}
     >
-      <Link href={`/${locale}/${cls.id}/${spec.id}`} className="block group">
+      <Link href={`/${locale}/${cls.id}/${spec.id}`} className="block">
         <motion.div
-          whileHover={{ y: -5, scale: 1.03 }}
-          whileTap={{ scale: 0.97 }}
-          transition={{ type: 'spring', stiffness: 380, damping: 22 }}
-          className="relative flex flex-col items-center gap-2.5 p-4 rounded-xl cursor-pointer overflow-hidden"
-          style={{
-            background: `color-mix(in srgb, ${cls.color} 4%, var(--color-surface))`,
-            border: `1px solid color-mix(in srgb, ${cls.color} 15%, var(--color-border))`,
-          }}
+          className="relative overflow-hidden rounded-xl cursor-pointer"
+          style={{ width: 76, height: 76 }}
+          whileHover="hover"
+          initial="rest"
         >
-          {/* Hover glow */}
+          {/* Deep glow behind icon */}
           <motion.div
-            className="absolute inset-0 rounded-xl opacity-0 pointer-events-none"
-            style={{
-              background: `radial-gradient(ellipse at 50% 0%, color-mix(in srgb, ${cls.color} 18%, transparent), transparent 70%)`,
-            }}
-            whileHover={{ opacity: 1 }}
+            className="absolute -inset-2 rounded-2xl blur-lg"
+            style={{ backgroundColor: cls.color }}
+            variants={{ rest: { opacity: 0 }, hover: { opacity: 0.45 } }}
             transition={{ duration: 0.25 }}
           />
 
-          {/* Icon with glow ring */}
-          <div className="relative">
+          {/* Tile background */}
+          <motion.div
+            className="absolute inset-0 rounded-xl"
+            style={{
+              background: `color-mix(in srgb, ${cls.color} 6%, var(--color-surface))`,
+            }}
+            variants={{
+              rest: { background: `color-mix(in srgb, ${cls.color} 6%, var(--color-surface))` },
+              hover: { background: `color-mix(in srgb, ${cls.color} 14%, var(--color-surface))` },
+            }}
+            transition={{ duration: 0.2 }}
+          />
+
+          {/* Border ring */}
+          <motion.div
+            className="absolute inset-0 rounded-xl border"
+            style={{ borderColor: cls.color }}
+            variants={{ rest: { opacity: 0.12 }, hover: { opacity: 0.6 } }}
+            transition={{ duration: 0.2 }}
+          />
+
+          {/* Icon */}
+          <motion.div
+            className="absolute inset-0 flex items-center justify-center"
+            variants={{ rest: { scale: 1 }, hover: { scale: 1.1, y: -2 } }}
+            transition={{ type: 'spring', stiffness: 400, damping: 22 }}
+          >
             <Image
               src={`${WOWHEAD_ICON_CDN}/${spec.icon}.jpg`}
               alt={spec.name}
-              width={56}
-              height={56}
+              width={54}
+              height={54}
               className="rounded-lg relative z-10"
               unoptimized
             />
-            <motion.div
-              className="absolute -inset-1 rounded-xl opacity-0 blur-sm"
-              style={{ backgroundColor: cls.color }}
-              whileHover={{ opacity: 0.35 }}
-              transition={{ duration: 0.2 }}
-            />
-          </div>
+          </motion.div>
 
-          {/* Spec name */}
-          <span
-            className="text-xs font-semibold text-fg-muted group-hover:text-fg transition-colors duration-200 relative z-10"
-            style={{ fontFamily: 'var(--font-display)', letterSpacing: '0.03em' }}
+          {/* Spec name — slides up from bottom on hover */}
+          <motion.div
+            className="absolute inset-x-0 bottom-0 flex items-end justify-center pb-1.5 z-20"
+            variants={{ rest: { opacity: 0, y: 6 }, hover: { opacity: 1, y: 0 } }}
+            transition={{ duration: 0.18 }}
           >
-            {spec.name}
-          </span>
+            <span
+              className="text-[9px] font-semibold uppercase tracking-widest px-1 leading-none"
+              style={{
+                color: cls.color,
+                textShadow: `0 0 10px ${cls.color}`,
+                fontFamily: 'var(--font-sans)',
+              }}
+            >
+              {spec.name}
+            </span>
+          </motion.div>
 
-          {/* Role dot */}
-          <span
-            className="w-1.5 h-1.5 rounded-full relative z-10"
-            style={{ backgroundColor: roleColor }}
+          {/* Top shine sweep on hover */}
+          <motion.div
+            className="absolute inset-0 rounded-xl pointer-events-none"
+            style={{
+              background:
+                'linear-gradient(135deg, rgba(255,255,255,0.07) 0%, transparent 50%)',
+            }}
+            variants={{ rest: { opacity: 0 }, hover: { opacity: 1 } }}
+            transition={{ duration: 0.3 }}
           />
         </motion.div>
       </Link>

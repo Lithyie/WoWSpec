@@ -8,7 +8,7 @@ export default async function HomePage() {
   const locale = await getLocale()
 
   return (
-    <div className="max-w-275 mx-auto px-6 py-14">
+    <div className="max-w-7xl mx-auto px-8 py-14">
       <HeroTitle title={t('title')} subtitle={t('subtitle')} />
       <ClassBrowser classes={CLASSES} locale={locale} />
     </div>

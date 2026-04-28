@@ -5,7 +5,7 @@ import { Search, X } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useTranslations } from 'next-intl'
 import type { WowClass } from '@/types'
-import { ClassRow } from './ClassRow'
+import { SpecCard } from './SpecCard'
 
 interface ClassBrowserProps {
   classes: WowClass[]
@@ -20,12 +20,11 @@ export function ClassBrowser({ classes, locale }: ClassBrowserProps) {
   const [query, setQuery] = useState('')
   const [roleFilter, setRoleFilter] = useState<RoleFilter>('all')
 
-  const filtered = useMemo(() => {
+  const allSpecs = useMemo(() => {
     const q = query.toLowerCase().trim()
-    return classes
-      .map(cls => ({
-        ...cls,
-        specs: cls.specs.filter(spec => {
+    return classes.flatMap(cls =>
+      cls.specs
+        .filter(spec => {
           const matchesQuery =
             !q || cls.name.toLowerCase().includes(q) || spec.name.toLowerCase().includes(q)
           const matchesRole =
@@ -34,9 +33,9 @@ export function ClassBrowser({ classes, locale }: ClassBrowserProps) {
             (roleFilter === 'healer' && spec.role === 'healer') ||
             (roleFilter === 'dps' && (spec.role === 'melee_dps' || spec.role === 'ranged_dps'))
           return matchesQuery && matchesRole
-        }),
-      }))
-      .filter(cls => cls.specs.length > 0)
+        })
+        .map(spec => ({ cls, spec }))
+    )
   }, [classes, query, roleFilter])
 
   const ROLE_FILTERS: { value: RoleFilter; label: string }[] = [
@@ -47,8 +46,8 @@ export function ClassBrowser({ classes, locale }: ClassBrowserProps) {
   ]
 
   return (
-    <div className="flex flex-col items-center gap-10">
-      {/* Controls — centered */}
+    <div className="flex flex-col items-center gap-8">
+      {/* Controls */}
       <div className="flex flex-col items-center gap-3">
         <div className="relative">
           <Search size={13} className="absolute left-3 top-1/2 -translate-y-1/2 text-fg-subtle pointer-events-none" />
@@ -93,24 +92,34 @@ export function ClassBrowser({ classes, locale }: ClassBrowserProps) {
         </div>
       </div>
 
-      {/* Icon grid — groups by class, all centered */}
-      <div className="flex flex-col items-center gap-4 w-full max-w-4xl">
+      {/* Flat icon grid — full width */}
+      <motion.div
+        className="flex flex-wrap justify-center gap-3 w-full"
+        layout
+      >
         <AnimatePresence mode="popLayout">
-          {filtered.map((cls, i) => (
-            <ClassRow key={cls.id} cls={cls} locale={locale} rowIndex={i} />
+          {allSpecs.map(({ cls, spec }, i) => (
+            <motion.div
+              key={`${cls.id}-${spec.id}`}
+              layout
+              exit={{ opacity: 0, scale: 0.8 }}
+              transition={{ duration: 0.2 }}
+            >
+              <SpecCard spec={spec} cls={cls} locale={locale} index={i} />
+            </motion.div>
           ))}
         </AnimatePresence>
+      </motion.div>
 
-        {filtered.length === 0 && (
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="text-xs text-fg-subtle py-10"
-          >
-            No results
-          </motion.p>
-        )}
-      </div>
+      {allSpecs.length === 0 && (
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="text-xs text-fg-subtle py-10"
+        >
+          No results
+        </motion.p>
+      )}
     </div>
   )
 }
